@@ -1,0 +1,68 @@
+/*
+In simple words //we are going to make map of freq p
+//then we will make a map of freq of first p number of element in s
+after that we will compare both the freq of the hashmaps...whatever happens...we will increment the size of the window
+//to the next we aquire the next elemnt and we reject the previous elements.....
+
+*/
+
+import java.util.HashMap;
+
+class FindAllAnagrams {
+    public static int findAnagrams(String s, String p) {
+        
+        int count=0;
+        HashMap<Character,Integer> shm=new HashMap<>();
+        HashMap<Character,Integer> phm=new HashMap<>();
+        for(int i=0;i<p.length();i++){
+            char ch=s.charAt(i);
+            shm.put(ch,shm.getOrDefault(i,0)+1);
+        }
+        for(int i=0;i<p.length();i++){
+            char chp=p.charAt(i);
+            phm.put(chp,phm.getOrDefault(i,0)+1);
+        }
+        int j=0;  //realease
+        int i=p.length();  //aquire
+        while(i<s.length()){
+            if(compare(shm,phm)==true){
+                count++;
+              
+            }
+            //window will be move to right
+            char ch=s.charAt(i);
+            shm.put(ch, shm.getOrDefault(ch,0)+1);
+            
+           //release..suppose window is of length 3 if we have to move to 4 it menas we have to eliminate first element
+            char chr=s.charAt(i-p.length());    //i=2,p.length=4    5-4 means 1 ignored
+            if(shm.getOrDefault(chr,0)==1){
+                shm.remove(chr);   //inside that windowif character is 1..after release it will be gone
+            }
+            else{
+                shm.put(chr, shm.getOrDefault(chr,0)-1);  
+            }
+            i++;
+            
+        
+        }
+        if(shm.equals(phm)==true){
+                //last window ka comparison cant be done that why we're comparing it again
+                count++;
+              
+            }
+        return count;
+    }
+    public static boolean compare(HashMap<Character,Integer> s,HashMap<Character,Integer> p){
+        for(char ch:p.keySet()){
+            if(s.getOrDefault(ch,0)!=p.getOrDefault(ch,0)){
+                return false;
+            }
+        }
+        return true;
+    }
+    public static void main(String[] args){
+       String s = "cbaebabacd";
+       String p = "abc";
+       System.out.println(findAnagrams(s,p));
+    }
+}
