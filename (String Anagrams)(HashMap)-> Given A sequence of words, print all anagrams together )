@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+// {“cat”, “dog”, “tac”, “god”, “act”}
+// “cat tac act dog god”.
+//basic idea is take a map...find a unique string and...iterate through whole string array...and sort each and every
+//character for checking wheather it is matching with the unique character or not if matches--> go inside the if statement or else
+class Hello{
+    public static void main(String[] args){
+        String arr[] = { "cat", "dog", "tac", "god", "act" };
+        /*
+        key  :   value
+        cat  :   tac,act
+        dog  :   god    
+        */
+        printAnagramsOrder(arr);
+    }
+    //put all the Strings inside a hashmap and find all the count
+    //of the anagrams then print them in continous order
+    public static void printAnagramsOrder(String[] str){
+        HashMap<String,ArrayList<String>> hm=new HashMap<>();
+        for(int i=0;i<str.length;i++){
+            char[] chr=str[i].toCharArray();
+            //convert each and every value into character
+            Arrays.sort(chr);
+           String ans=new String(chr);
+            if(hm.containsKey(ans)){
+             //we'll get the answer and add it to the orig string
+               hm.get(ans).add(str[i]);           
+            }
+            else{
+                //for adding a new word to our map...we'll create and empty arraylist 
+                //and add it to the map
+           ArrayList<String> words=new ArrayList<>();
+           words.add(str[i]);
+          hm.put(ans, words);
+            }
+        }
+        //printing all the values of string
+        for(String s:hm.keySet()){
+            ArrayList<String> values=hm.get(s);
+            if(values.size()>1){
+                System.out.println(values);
+            }
+        }
+         //Time Complexity--> O(nm)
+        
+      
+    }
+}
