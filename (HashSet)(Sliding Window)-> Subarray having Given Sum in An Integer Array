@@ -1,0 +1,48 @@
+import java.util.HashSet;
+
+public class FindSubArrayOfGivenSUm {
+    public static void main(String[] args){
+    int[] arr={2, 6, 0, 9, 7, 3, 1, 4, 1, 10};
+    int sum=15;
+    System.out.println(FindSubArrayHashSet(arr,sum));
+    System.out.println(FindSubArraySlidingWindow(arr,sum));
+    }
+    //Explaination--> 2, 6, 0, 9, 7, 3, 1, 4, 1, 10 
+    /*Using the prefix sum...keep finding wheather sum_so_far-sum is giving something which is already present in that
+    subarray or not..like...in this ex  pref sum are...2,8,8,17....and 17-15=2 which already exist in pref sum
+    it means after 2 all the elements will be count inside the subarray */
+    public static boolean FindSubArrayHashSet(int[] arr,int sum){
+    HashSet<Integer> hs=new HashSet<>();
+    hs.add(0);  //optional..for handling the case when the subarray sum starts from ind 0
+    int sum_till_now=0;
+    for(int i:arr){
+        sum_till_now+=i;
+        //if sum_till_now-Sum is present inside the set
+        //subarray found
+        if(hs.contains(sum_till_now-sum)){
+            return true;
+        }
+        hs.add(sum_till_now);
+    }
+    return false;
+    }
+    public static boolean FindSubArraySlidingWindow(int[] arr,int sum){
+     //Size of window is not given...
+     int high=0; //used to iterate for adding values inside the sum
+     int sum_so_far=0;
+     for(int low=0;low<arr.length;low++){
+         
+         while(high<arr.length && sum_so_far<sum){
+           sum_so_far+=arr[high];
+           high++;  
+         }
+         if(sum_so_far==sum){
+             return true;
+         }
+         //otherwise release the low value frm window
+         sum_so_far-=arr[low];
+     }
+
+     return false;
+    }
+}
