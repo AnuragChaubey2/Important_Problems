@@ -1,0 +1,29 @@
+import java.util.HashMap;
+
+public class DuplicateInGivenRange {
+    public static void main(String[] args){
+        int[] arr={ 5, 6, 8, 2, 4, 6, 9};
+        int k=4;
+System.out.println(Duplicate(arr,k));
+    }
+    public static boolean Duplicate(int[] arr,int k){
+        HashMap<Integer,Integer> map=new HashMap<>();
+        //idea is to traverse the whole array..and find the index pos of elements...then 
+        //subtract both the index..if the diffrece is less or equal to k..then true or false
+        for(int i=0;i<arr.length;i++){
+            if(map.containsKey(arr[i])){
+                if(i-map.get(arr[i])<=k){
+                return true;
+                }
+            }  //storing the elements with theri
+            //indices
+            map.put(arr[i],i);
+        }
+
+
+
+
+
+        return false;
+    }
+}
