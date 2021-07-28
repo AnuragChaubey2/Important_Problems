@@ -1,0 +1,65 @@
+
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+ class KthLargestElements {
+
+ public static void Main(String[] args){
+    int[] arr = {10, 7, 11, 30, 20, 38, 2, 45};
+    int k = 3;
+    
+    System.out.println(KthLargestMaxHeap(arr, k));
+    System.out.println(KthLargestMinHeap(arr, k));
+    
+ }
+ public static int KthLargestMaxHeap(int[] arr,int k){
+     //Using Max Heap
+     /* Creating Maxheap-TC O(n)..in max heap we poll the elements, and it reshuffles itself by assigning new values
+     we'll poll till kth elements
+     TC analysis-> creation of heap- O(n)+ removing element and reshuffling
+     k*logN = O(n)+klog(n)...space-> O(n)
+     */
+    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+    
+    for(int i = 0; i < arr.length; i++) {
+      maxHeap.add(arr[i]);
+    }
+    
+    for(int i = 0; i < k - 1; i++) {
+      maxHeap.poll();  
+    }
+    
+    return maxHeap.peek();
+
+ }
+
+ public static int KthLargestMinHeap(int[] arr,int k){
+     /*more optimized way
+     the peek value for a heap of size k will be the 3rd largest..or kth
+     //largest...check is comming elemnt is<peek of heap..then dont add
+     //otherwise pop out the peek and exchange with this new one
+    TC-> O(n)- creating heap ....klogk ...remove k elements and shuffle only size k heap
+     TC--> O(n)+(kLogk)
+     */
+    if(arr.length < k) {
+        System.out.println("Invalid Case");
+        return -1;
+      }
+      
+      PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+      
+      for(int i = 0; i < k; i++) {
+        minHeap.add(arr[i]);
+      }
+      
+      for(int i = k; i < arr.length; i++) {
+        if(arr[i] > minHeap.peek()) {
+          minHeap.poll();
+          minHeap.add(arr[i]);
+        }  
+      }
+      
+      return minHeap.peek();
+
+ }
+}
