@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+
+public class TopKfreqElements {
+    public static void main(String[] args){
+
+    }
+ 
+        public static int[] topKFrequent(int[] nums, int k) {
+            HashMap<Integer, Integer> map = new HashMap<>(); // freq map
+    
+            for (int ele : nums) {
+                map.put(ele, map.getOrDefault(ele, 0) + 1);
+            }
+    
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
+                // {val, freq}
+                return a[1] - b[1];
+            });
+    
+            for (int key : map.keySet()) {
+    
+                int pair[] = new int[2];
+                pair[0] = key; // val
+                pair[1] = map.get(key); // freq
+    
+                pq.add(pair);
+    
+                if (pq.size() > k) {
+                    pq.remove();
+                }
+            }
+    
+            int ans[] = new int[k];
+            int i = 0;
+    
+            while (pq.size() > 0) {
+                int p[] = pq.remove();
+                int val = p[0];
+    
+                ans[i++] = val;
+            }
+    
+            return ans;
+        }
+    }
