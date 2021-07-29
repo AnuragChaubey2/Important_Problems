@@ -1,0 +1,38 @@
+import java.util.PriorityQueue;
+
+public class KthLargestSumContigous {
+    public static void main(String[] args){
+
+    }
+    public static int KthCnti(int[] arr,int k){
+     
+        //prefix sum
+        int[] sum=new int[arr.length+1];
+        sum[0]=0;
+        sum[1]=arr[0];
+        for(int i=2;i<=arr.length;i++){
+            sum[i]=sum[i-1]+arr[i-1];
+        }
+        //min heap
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+        //loop for contigous subarray sum pos wise
+        for(int i=1;i<=arr.length;i++){
+            //loop for traversing 
+            for(int j=i;j<=arr.length;j++){
+                int x=sum[j]-sum[i-1];
+                //if queue has less than k elements push it
+                if(pq.size()<k){
+                    pq.add(x);
+                }
+                else{
+                    if(pq.peek()<x){
+                        pq.poll();
+                        pq.add(x);
+                    }
+                }
+            }
+        }
+        //top element will be polled and that's the ans
+        return pq.poll();
+    }
+}
