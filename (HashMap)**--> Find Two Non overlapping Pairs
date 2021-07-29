@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class TwoNonOverlappingPair {
+    static class Pair{
+        int a,b;
+        Pair(int a,int b){
+            this.a=a;
+            this.b=b;
+        }
+    }
+    public static void main(String[] args){
+        int[] A = { 3, 4, 7, 3, 4 };
+ 
+        TwoNonOverlapping(A);
+    }
+    //basic idea is to find the sum of two numbers and check wheather they exist inside our map or not...if exist
+    //check for the values if the do not match means the are non overlapping
+    public static void TwoNonOverlapping(int[] arr){
+        HashMap<Integer,ArrayList<Pair>> map=new HashMap<>();
+      for(int i=0;i<arr.length-1;i++){
+          for(int j=i+1;j<arr.length;j++){
+              //sum of current pair
+            int sum=arr[i]+arr[j];
+            if(map.containsKey(sum)){
+                //check for everyPair of desired sum
+                for(Pair pair:map.get(sum)){
+                    int m=pair.a;
+                    int n=pair.b;
+                    //if the do not overlap
+                    if((m!=i && m!=j) && (n!=i && (n!=j))){
+                        System.out.printf("First Pair (%d, %d)\n", arr[i], arr[j]);
+                        System.out.printf("Second Pair (%d, %d)\n", arr[m], arr[n]);
+                    }
+                }
+            }
+            map.putIfAbsent(sum, new ArrayList<>());
+            map.get(sum).add(new Pair(i, j));
+
+          }
+      }
+      System.out.print("No non-overlapping pairs present");
+    }
+}
+
