@@ -1,0 +1,27 @@
+import java.util.HashMap;
+
+public class GroupElementInArray {
+    public static void main(String[] args){
+        int[] A = { 5, 4, 5, 5, 3, 1, 2, 2, 4 };
+         GroupElements(A);
+    }
+    public static void GroupElements(int[] arr){
+      HashMap<Integer,Integer> map=new HashMap<>();
+      for(int i:arr){
+          if(map.containsKey(i)){
+           //sort the get
+           //decrese till it becomes 0
+           int n=map.get(i)+1;
+           while(n--!=0){
+               System.out.println(i);
+           }
+           map.remove(i);
+           //remove from the map as it is traversed
+           
+          }
+          else{
+              map.put(i, 1);
+          }
+      }
+    }
+}
