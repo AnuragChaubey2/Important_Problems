@@ -1,0 +1,63 @@
+class AllPathSumOfBinaryTree{
+    public static void main(String[] args){
+    AllPathSumOfBinaryTree tree=new AllPathSumOfBinaryTree();
+        tree.root=new TreeNode(6);
+        tree.root.left = new TreeNode(3);
+        tree.root.right = new TreeNode(5);
+        tree.root.right.right = new TreeNode(4);
+        tree.root.left.left = new TreeNode(2);
+        tree.root.left.right = new TreeNode(5);
+        tree.root.left.right.right = new TreeNode(4);
+        tree.root.left.right.left = new TreeNode(7);
+        System.out.print("Level Of Tree" + 
+        Level(tree.root,4,0));
+        System.out.println(isSiblings(tree.root,3,5));
+        System.out.println(Cousins(tree.root,3,5));
+    }
+    TreeNode root;
+   //Level Of Bianary Tree
+public static int Level(TreeNode root,int key,int level){
+    if(root==null){
+        return 0;
+    }
+    if(root.data==key){   //if key matches return the level
+        return level;
+    }
+    //idea is to identify which side is not going to be not null...if not null it means...our key is present
+    int l=Level(root.left,key,level+1); //everytime we go down rec...increment the level by +1
+    if(l!=0){
+        return l;
+    }
+    l=Level(root.right,key,level+1);
+    return l;
+
+}
+public static  boolean isSiblings(TreeNode root,int x,int y){
+//Two Nodes are siblings of Each other when they do not belong to sameroot
+if(root==null){
+    return false;
+}
+//it means...if two nodes have same root.....or in any subproblem we found out this condition exist then
+//siblings exist
+return (root.left.data==x && root.right.data==y)||(root.left.data==y && root.right.data==x)|| isSiblings(root.left, x, y)||isSiblings(root.right, x, y);
+}
+public static boolean Cousins(TreeNode root,int x,int y){
+    // two nodes are called as cousins if they have diffrent root but samelevel....
+    if(root==null){
+        return false;
+    }
+    if(Level(root,x,1)!=Level(root,y,1)){
+        return false;
+    }
+    return !isSiblings(root, x, y);
+}
+
+}
+class TreeNode{
+    int data;
+    TreeNode left,right;
+    TreeNode(int data){
+        this.data=data;
+        left=right=null;
+    }
+}
