@@ -26,6 +26,9 @@ public class DeepestLevel {
         }
         return sum;
     }
+    
+    //Optimized
+    
 }
 class Node2{
 int data;
@@ -36,4 +39,41 @@ Node2(int data){
     left=right=null;
 }
 
+}
+//OPtimized Part-2
+class Solution
+{//Best Approach
+    int maxCurrHeight= 0;//Stores the deepest height till now
+    int sum= 0;//global sum, to store the sum of all  nodes at the deepest level
+    public int deepestLeavesSum(TreeNode root) 
+    {
+        maxHeight(root, 0);//Calculating the sum of all nodes at the deepest level 
+        return sum;
+    }
+    public void maxHeight(TreeNode root, int height)//we are using postorder traversal because we want to check our child first and then the parent 
+    {//height is calculated on the basis of edge 
+        if(root == null)//we encounter null node we just return back 
+            return;
+        
+        maxHeight(root.left, height + 1);//recursively traversing the left subtree and increasing the height on the basis of edge 
+        maxHeight(root.right, height + 1);//recursively traversing the right subtree and increasing the height on the basis of edge 
+        
+        if(root.left == null && root.right == null)//leaf node 
+        {
+            if(maxCurrHeight == height){//when we are at the deepest node in any subtree, we just add the data to the sum//same level 
+                sum+= root.val; 
+                return;//returning back to the parent and deleting the current activation block 
+            }
+            else if(height > maxCurrHeight)//when we encounter a height greater than the current maximum height//different level 
+            {
+                maxCurrHeight= height;//we update the current deepest height 
+                sum= root.val;//overwride the sum, since we encouter a new greater height new sum would be calculated on the basis of that height
+                return;
+            } 
+            //height < maxHeight
+            return; //we are at smaller height than the current max height
+        }
+        
+        return;//returning back to the parent, as all the functions are completed 
+    }
 }
