@@ -1,0 +1,42 @@
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+class SecondLargest{
+    public static void main(String[] args){
+   int[] arr={12, 35, 1, 10, 34, 1};  
+   System.out.println(Find(arr));
+   System.out.println(secondLargestTwopointer(arr));
+    }
+    public static int Find(int[] arr){
+        //Heap Method  //O(n)+logn complexity
+        PriorityQueue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        for(int i=0;i<arr.length;i++){
+            pq.add(arr[i]);
+        }
+        for(int i=0;i<1;i++){
+            pq.remove();
+        }
+        return pq.peek();
+    }
+    public static int secondLargestTwopointer(int[] arr){
+        if(arr.length<2){
+            System.out.println("Invalid");
+        }
+        int first,second;
+        first=second=Integer.MIN_VALUE;
+        for(int i=0;i<arr.length-1;i++){
+        if(arr[i]>first){
+            first=second;
+            first=arr[i]; 
+            //if we find an element with the value greter than the first then shift it to first
+            //and put the current first value to second            
+        }
+//above ex..pointer of first and second will be at 12 which is wrong..second pointer should be art
+//34....that why we have to move the second pointer as well          
+        else if(second<arr[i] && arr[i]!=first){
+            second=arr[i];
+        }       
+        }
+        return arr[second];
+    }
+}
