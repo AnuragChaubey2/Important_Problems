@@ -1,0 +1,19 @@
+ class ArrangeBuildings {
+    public static void main(String[] args){
+int n=3;
+System.out.println(ArrangeBuildings(n));
+    }
+    public static int ArrangeBuildings(int n){
+        int space=1;
+        int building=1;
+        for(int i=2;i<=n;i++){
+            int newSpace=space+building;
+            int Building=space;
+            building=Building;
+            space=newSpace;
+        }
+        int total=(space+building)*(space+building);
+        return total;
+        }
+}
+//for dp solution check...count binary Strings
