@@ -1,0 +1,38 @@
+ class EvenValuedGrandParent {
+    static TreeNode2 root;
+    public  static int EvenValue(TreeNode2 root){
+        int sum=0;
+        if(root==null){
+            EvenValue(root);
+            return sum;
+        }
+        
+        if(root.data%2==0){
+            if(root.left!=null && root.left.left!=null){
+                sum+=root.left.left.data;
+            }
+             if(root.right!=null && root.right.right!=null){
+                sum+=root.right.right.data;
+            }
+             if(root.left!=null && root.left.right!=null){
+                sum+=root.left.right.data;
+            }
+             if(root.right!=null && root.right.left!=null){
+                sum+=root.right.left.data;
+            }              
+              }  //if not simply move the pointer to left or right
+              EvenValue(root.left);
+              EvenValue(root.right);  
+        
+        return sum;
+    }
+}
+class TreeNode2{
+    int data;
+    TreeNode2 left;
+    TreeNode2 right;
+    TreeNode2(int data){
+        this.data=data;
+        left=right=null;
+    }
+}
