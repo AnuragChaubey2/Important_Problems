@@ -1,0 +1,44 @@
+class place{
+    public static void main(String[] args){
+    int[][] arr={
+    {0,0,1,1,1,1,1,1},
+    {0,0,1,1,1,1,1,1},
+    {1,1,1,1,1,1,1,0},
+    {1,1,0,0,0,1,1,0},
+    {1,1,1,1,0,1,1,0},
+    {1,1,1,1,0,1,1,0},   //ans should be 3
+    {1,1,1,1,1,1,1,0},
+    {1,1,1,1,1,1,1,0}
+};
+System.out.println(CountNumberOfIsland(arr));
+    }
+    public static int CountNumberOfIsland(int[][] arr){
+        //all the zeros are land and 1 are water
+        //cells are connected with n, w,e s
+        int count=0;
+        boolean[][] visited=new boolean[arr.length][arr[0].length];
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[i].length;j++){
+                if(arr[i][j]==0 && visited[i][j]==false){   // land, and not visited
+                    findCompomemtdfs(arr,i,j,visited);
+                    count++;               
+                }                
+            }
+        }
+         return count;
+    }
+    public static void findCompomemtdfs(int[][] arr,int i,int j,boolean[][] visited){
+//visited mark
+if(i<0 || j<0 || i>=arr.length || j>=arr[0].length || arr[i][j]==1 || !visited[i][j]){
+    return;   //if worng call is made then return
+}
+visited[i][j]=true;
+//neighbours
+findCompomemtdfs(arr, i-1, j, visited);
+findCompomemtdfs(arr, i, j-1, visited);
+findCompomemtdfs(arr, i+1, j, visited);
+findCompomemtdfs(arr, i, j+1, visited);
+
+    }
+
+}
