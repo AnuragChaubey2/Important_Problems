@@ -1,0 +1,30 @@
+class TreeNode{
+    int key;
+    TreeNode left,right;
+    TreeNode(int key){
+        left=right=null;
+        this.key=key;
+    }
+}
+class place{
+    public static void printForm(TreeNode root){
+    StringBuilder sb=new StringBuilder();
+    if(root == null) {
+        return;
+    }
+     
+   Integer current=root.key;
+    sb.append(Integer.toString(current));
+    
+    if(root.left!=null){
+        sb.append("(");
+        printForm(root.left);
+        sb.append(")");
+    }
+    if(root.right!=null){
+        sb.append("(");
+        printForm(root.right);
+        sb.append(")");
+    }
+}
+}
