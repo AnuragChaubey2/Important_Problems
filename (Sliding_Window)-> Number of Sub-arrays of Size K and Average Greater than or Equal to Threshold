@@ -1,0 +1,30 @@
+class place{
+    public static void main(String[] args){
+        int[] arr = {2,2,2,2,5,5,5,8};
+         int k = 3;
+          int threshold = 4;
+          System.out.println(minimum(arr,k,threshold));
+    }
+    public static int minimum(int[] arr,int k, int threshold){
+       // Number of sub-arrays of size k and Average Greater than or Equal to Threshold
+       int sum=0;
+       int count=0;
+       for(int i=0;i<k;i++){
+        sum+=arr[i];
+       }
+       int avg=sum/k;
+       if(avg>=threshold){
+           count++;
+       }
+     
+       for(int i=k;i<arr.length;i++){
+           sum+=arr[i]-arr[i-k];
+           avg=sum/k;
+           if(avg>=threshold){
+            count++;
+        }
+       }
+       
+       return count;
+    }
+}
