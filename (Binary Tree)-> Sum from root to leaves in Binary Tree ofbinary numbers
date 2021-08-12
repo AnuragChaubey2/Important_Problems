@@ -1,0 +1,40 @@
+class TreeNode{
+    int key;
+    TreeNode left,right;
+    TreeNode(int key){
+        left=right=null;
+        this.key=key;
+    }
+}
+class place{
+    int sum=0;
+
+    public boolean FindNumber(TreeNode root,StringBuilder sb){
+       if(root!=null){
+        sb.append(root.key);
+        if(root.left==null && root.right==null){
+            sum+=Integer.parseInt(sb.toString(),2);
+            return true;
+        }
+        if(FindNumber(root.left,sb)){  //if the node is already visited it means....we dont have to add it into the 
+            //stringbuilder....that's why we are popping it
+            sb.deleteCharAt(sb.length()-1);
+        }
+        if(FindNumber(root.right, sb)){
+            sb.deleteCharAt(sb.length()-1);
+        }
+        else{
+            return false;
+        }
+       }
+       return true;
+    }
+    public int sumRootToLeaf(TreeNode root) {
+        if (root == null)
+            return 0;
+        StringBuilder sb = new StringBuilder();
+        FindNumber(root,sb);
+        return sum;
+        
+    }
+}
