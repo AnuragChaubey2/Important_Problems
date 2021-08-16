@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+class place{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int m=sc.nextInt();
+        int[][] arr=new int[n][m];
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                arr[i][j]=sc.nextInt();
+            }
+        }
+        int minrow=0;
+        int mincol=0;
+        int maxr=arr.length-1;
+        int maxcol=arr[0].length;
+        while(true){  //while boxes are tjere
+            //left wall
+ for(int i=minrow,j=mincol;i<=maxr;i++){
+     //j min col pe hi baitha raha
+System.out.println(arr[i][j]);
+ }
+            //bottom wall
+for(int i=mincol+1,j=maxr;i<=maxcol;i++){
+System.out.println(arr[j][i]);
+}
+            //right wall
+
+            //top wall
+
+        }
+    }
+}
