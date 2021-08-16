@@ -1,42 +1,45 @@
-class Solution {
-      public static int mod = (int)(Math.pow(10, 9) + 7);   
-    public int kConcatenationMaxSum(int[] arr, int k) {
-        
-		
-        if(k==1)
-            return (int)(kadane(arr)%mod);
-        
-        long sum=0;
-        for(int i=0;i<arr.length;i++)
-            sum+=arr[i];
-        
-        int[] narr = new int[arr.length*2];
-        
-        for(int i=0;i<arr.length;i++){
-            narr[i]=arr[i];
-            narr[i+arr.length] = arr[i];
-        }
-        
-        if(sum<0){
-            long kadaneTwo = kadane(narr);
-            return (int)(kadaneTwo%mod);
-        }
-        
-        //sum>=0
-        long kadaneTwo = kadane(narr) + (k-2)*sum;
-        return (int)(kadaneTwo%mod);
-      
+//Array
+class place{
+    public static void main(String[] args){
+
     }
-    
-    public long kadane(int[] arr){
-        
-        long currMax=0,max = 0;
-        
+    public static int KConcatenation(int[] arr,int k){
+        int sum=0;
+        int ans=0;
+      for(int i=0;i<arr.length;i++){
+          sum+=arr[i];
+      }
+      if(k==1){
+       ans=(int)(Kadane(arr)%100000007);
+     //for handling negative values
+     ans=Math.max(ans, 0);
+      }
+      int[] newArray=new int[2*arr.length];
+      for(int i=0;i<arr.length;i++){
+          newArray[i]=newArray[arr.length+i]=arr[i];
+      }
+      if(sum<0){
+         ans= (int)(Kadane(arr)%100000007);
+         return Math.max(ans, 0);
+      }
+      //sum>=0;v  //beech wale jetne bhi hai sab ke sab conside kiye hi jaynegy inevitable
+      //sare positve wale bhi handle ho jaynegy isi me
+      ans=(int)(Kadane(arr)+(k-2)*sum)%100000007;
+      return Math.max(ans, 0);
+
+    }
+    public static int Kadane(int[] arr){
+        int max_so_far=Integer.MAX_VALUE;
+        int curr_sum=0;
         for(int i=0;i<arr.length;i++){
-            currMax = Math.max(currMax+arr[i],arr[i]);
-            max = Math.max(currMax,max);
+            curr_sum+=arr[i];
+            if(max_so_far<curr_sum){
+                max_so_far=curr_sum;
+            }
+            if(curr_sum<0){
+                curr_sum=0;
+            }
         }
-        
-        return max;
+        return max_so_far;
     }
 }
