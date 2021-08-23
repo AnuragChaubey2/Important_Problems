@@ -1,0 +1,28 @@
+class place{
+     public static void main(String[] args){
+         String s="abcabc";
+         System.out.println(getMinDeletions(s));
+     }
+     static int getMinDeletions(String str)
+    {
+        int MAX_CHAR=500;
+         
+        int n = str.length();
+        if (n > MAX_CHAR)
+            return -1;
+         
+        int dist_count = 0;
+        int count[] = new int[MAX_CHAR];
+        for(int i = 0; i < MAX_CHAR; i++)
+            count[i] = 0;
+         
+        for (int i = 0; i < n; i++)
+        {
+            if(count[str.charAt(i)-'a'] == 0)
+                dist_count++;
+            count[str.charAt(i)-'a']++;
+        }
+         
+        return (n-dist_count);
+    }
+}
