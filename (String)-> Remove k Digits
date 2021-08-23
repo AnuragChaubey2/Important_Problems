@@ -1,0 +1,61 @@
+class Solution {
+    public String removeKdigits(String num, int k) {
+        if(num.length() <= k) return "0";
+        
+		/* 
+		Goal is to keep smaller number
+		
+		1. if current character is less than stack top;
+		and if stack top is removed, the resulting number will be lesser
+		
+		2. If current char is greater than st top,
+		don't remove it as it will increase the resulting number
+		
+		3. if they are equal, don't remove it yet,
+		because maybe case 1 can happen in future
+		*/
+        Deque<Character> st = new LinkedList<>();
+        for(char ch: num.toCharArray()) {
+            while(!st.isEmpty() &&  st.peek() > ch && k > 0) {
+                st.pop();
+                k--;
+            }
+            st.push(ch);
+        }
+        
+		/*
+		K is positive, so we still can remove characters from result
+		we know that our stack content is in increasing order (stack top has highest)
+		
+		So, to decrease resulting number pop from stack top
+		*/
+        while(k > 0 && !st.isEmpty()) {
+            st.pop();
+            k--;
+        }
+        
+        if(st.isEmpty()) return "0";
+
+        
+        StringBuilder ans = new StringBuilder();
+        /*
+		No need to reverse stack content and check for leading 0s;
+		We can use our stack as Deque to keep popping from bottom 
+		*/
+        Deque<Character> dq = st;
+        while(!dq.isEmpty()) {
+            char ch = dq.pollLast();
+            if(ans.length() == 0 && ch == '0') { // leading 0
+                continue;
+            }
+            ans.append(ch);
+        }
+		/*
+        leading 0s are not added in ans. 
+		So check again if size of ans is 0 or not
+		*/
+        if(ans.length() == 0) return "0";
+        return ans.toString();
+        
+    }
+}
