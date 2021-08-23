@@ -1,0 +1,27 @@
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        
+   char[] arr=new char[word1.length()+word2.length()];
+    int index=0;
+    int i=0;
+    for(;i<word1.length() || i<word2.length();i++)
+    {
+        if(i<word1.length() && i<word2.length())
+        {
+        arr[index++]=word1.charAt(i);
+        arr[index++]=word2.charAt(i);
+        }
+        else if(i<word1.length())
+        {
+            arr[index++]=word1.charAt(i);
+        }
+        else
+        {
+            arr[index++]=word2.charAt(i);
+        }
+       
+    }
+    
+    return new String(arr);
+}
+}
