@@ -1,0 +1,16 @@
+public class Solution{ 
+public int minAddToMakeValid(String s) {
+        int minAddCount = 0;
+        int currentBalance = 0;
+        for(char ch : s.toCharArray()) {
+            currentBalance += (ch == '(')? 1:-1;
+            if(currentBalance < 0) {
+                minAddCount++;
+                currentBalance = 0;
+            }
+        }
+        minAddCount += currentBalance;
+        
+        return minAddCount;
+    }
+}
