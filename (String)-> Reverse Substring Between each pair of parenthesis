@@ -1,0 +1,42 @@
+
+        //observation if...every element is put inside the stack then just take it out
+//only the letters not the parenthesis
+        //problem is if revers the parenthesis with is at thee center or dosen;t depend on other parenthesis...we have to store the reversed sequence somewhere
+        //that's why need  stack and queue 
+class Solution {
+    public String reverseParentheses(String s) {
+    Stack<Character>st=new Stack<>();
+    LinkedList<Character>queue=new LinkedList<>();
+        
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            
+            if(ch!=')')
+            st.push(ch);
+            
+            else{
+                
+                while(st.peek()!='('){
+                queue.add(st.pop());
+                }
+                    
+                st.pop();
+                while(queue.size()>0){
+                char rm = queue.remove();
+                st.push(rm);
+                }
+                
+                }
+        
+        }
+
+    char[] arr=new char[st.size()];
+    int idx = arr.length-1;
+    while(idx >= 0){
+    arr[idx]= (st.pop());
+    idx--;    
+    }
+    return new String(arr);
+    
+    }
+}
