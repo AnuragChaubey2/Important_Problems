@@ -1,0 +1,46 @@
+class Solution {
+   public int nextGreaterElement(int n) {
+StringBuilder s=new StringBuilder();
+while(n>0){
+int rem=n%10;
+s.append(rem);
+n=n/10;
+}
+int l=s.length();
+StringBuilder res=s.reverse();
+String str=res.toString();
+
+    char[] ch=str.toCharArray();  
+    int index=l-2;
+    while(index>=0 && ch[index]>=ch[index+1]){
+        index--;
+    }
+    if(index==-1) return -1;
+    
+    int low=index; int high=l-1;
+    while(ch[low]>=ch[high])
+        high--;
+    
+    char ch1=ch[low];
+    ch[low]=ch[high];
+    ch[high]=ch1;
+    
+    int start=index+1; int end=l-1;
+    while(start<end){
+        char temp=ch[start];
+        ch[start]=ch[end];
+        ch[end]=temp;
+        start++;
+        end--;
+    }
+    StringBuilder ans=new StringBuilder();
+    for(int i=0;i<l;i++){
+        ans.append(ch[i]);
+    }
+    String out=ans.toString();
+    long output=Long.parseLong(out);
+    if(output>Integer.MAX_VALUE || output<Integer.MIN_VALUE)
+        return -1;
+    return (int)output;
+}
+}
