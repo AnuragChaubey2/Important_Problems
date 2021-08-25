@@ -1,0 +1,22 @@
+import java.util.Arrays;
+import java.util.Stack;
+
+class place{
+    public static void main(String[] args){
+
+    }
+    public static int[] NGE(int[] arr,int n){
+        Stack<Integer> st=new Stack<>();
+        int[] op=new int[n];
+        Arrays.fill(op,-1);
+        for(int i=0;i<2*n;i++){
+            while(!st.isEmpty() && arr[st.peek()]<=arr[i%n]){
+                op[st.pop()]=arr[i%n];
+            }
+            if(i<n){
+                st.push(i);
+            }
+        }
+        return op;
+    }
+}
