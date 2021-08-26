@@ -1,0 +1,28 @@
+class Solution {
+    public int numSubarrayBoundedMax(int[] nums, int left, int right) {
+     int res=0;
+        int start=0;
+        int end=0;
+        int windowCount=0;
+        while(end<nums.length){
+            if(nums[end]>=left && nums[end]<=right){
+                //recalculating window size
+                windowCount=end-start+1;
+            }
+            //outside the right range, update start.and reset the window
+            else if(nums[end]>right){
+                windowCount=0;
+                start=end+1;
+            }
+            //less than range use the previous window
+            else if(nums[end]<left){
+                windowCount=windowCount;
+            }
+            //at the last add it to the answer set 
+            res+=windowCount;
+            end++;
+        }
+        return res;
+        
+    }
+}
