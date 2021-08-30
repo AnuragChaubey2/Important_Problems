@@ -1,0 +1,50 @@
+class place {
+  /*basic funda of this problem is.......
+  1> swap the array which is having the lowest weightage.....after swaping just reverse the numbers
+  in order to get the proper order of the array
+  */
+  public void nextPermutation(int[] nums) {
+      if(nums.length==1) return;
+      
+      int flag = -1;
+      int pivot = -1;
+      
+      for(int i=nums.length-1; i>0; i--){
+          if(nums[i]-nums[i-1] > 0){
+              flag=1;                               //if there's possibility to get required value just put the pivot
+                                                                   //there
+              pivot=i-1;
+              break;
+          }
+      }
+      
+      if(flag==-1){    //if the whole array is in decending order just reverse it
+          reverse(nums, 0, nums.length-1);
+          return;
+      }
+      
+      for(int i=nums.length-1; i>pivot; i--){    //otherwise to handle the case....from pivot to last index
+          if(nums[i]>nums[pivot]){               //swap the numbers with pivot...and atlast reverse them in order
+              swap(nums, i, pivot);               //to get the next permutation
+              reverse(nums, pivot+1, nums.length-1);
+              return;
+          }
+      }        
+      
+  }
+  
+  public void reverse(int[] nums, int i, int j){
+      while(i<j){
+          swap(nums, i, j);
+          i++;
+          j--;
+      }
+      return;
+  }
+  public void swap(int[] nums, int i, int j){
+      int t = nums[i];
+      nums[i] = nums[j];
+      nums[j] = t;
+      return;
+  }
+}
