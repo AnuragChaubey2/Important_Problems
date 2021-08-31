@@ -1,0 +1,41 @@
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+
+class Tree{
+public TreeNode[] splitBST(TreeNode root, int V) {
+            TreeNode small = new TreeNode(0);
+            TreeNode big = new TreeNode(0);
+            split(root, V, small, big);
+            return new TreeNode[]{small.right, big.left};
+        }
+
+        private void split(TreeNode root, int v, TreeNode small, TreeNode big) {
+            if (root == null) {
+                return;
+            }
+            if (root.val <= v) {
+                small.right = root;
+                TreeNode right = root.right;
+                root.right = null;
+                split(right, v, root, big);
+            } else {
+                big.left = root;
+                TreeNode left = root.left;
+                root.left = null;
+                split(left, v, small, root);
+            }
+        }
+  }
+
+class TreeNode{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int val){
+        this.val=val;
+        left=right=null;
+    }
+}
