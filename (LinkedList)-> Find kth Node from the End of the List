@@ -1,0 +1,27 @@
+//kth node from the end of linked list
+class Node{
+    int key;
+    Node next;
+    Node(int key){
+        this.key=key;
+        next=null;
+    }
+}
+class Array1{
+    public static Node findNth(Node head,int k){
+        Node temp=head;
+        int count=0;
+       while(temp!=null){
+           temp=temp.next;
+           count++;
+       }
+       if(count>=k){   //if the total number of nodes present is greter than k
+           temp=head;
+           for(int i=0;i<count-k+1;i++){
+               temp=temp.next;
+           }
+           
+       }
+       return temp;
+    }
+}
