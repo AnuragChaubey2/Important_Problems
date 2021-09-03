@@ -1,0 +1,29 @@
+//sort array 0's, 1's and 2's 
+class Array1{
+    public static void main(String[] args){
+        int[] arr={0, 1, 0, 1, 1, 1};
+        Seg(arr);
+    }
+    public static void Seg(int[] arr){
+        int i=0;
+        int j=arr.length-1;
+        while(i<j){
+            if(arr[i]==0){
+                i++;
+            }
+            else if(arr[j]==1){
+                j--;
+            }
+            else{
+            arr[i]=0;
+            arr[j]=1;
+            i++;
+            j--;
+        }
+        }
+        for(int t=0;t<arr.length;t++){
+        System.out.print(arr[t]);
+        }
+        }
+    
+}
