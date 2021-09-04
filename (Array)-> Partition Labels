@@ -1,0 +1,26 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Array1{
+    public static void main(String[] args){
+        
+    }
+    public static List<Integer> partition(String s){
+        List<Integer> list=new ArrayList<>();
+        int[] arr=new int[26];
+        for(int i=0;i<26;i++){
+            arr[s.charAt(i)-'a']=i;    // arr[0]=0, arr[1]=1, arr[0]=2 Each time we'll keep updating this values
+                 }
+        int start=0;
+        int end=0;
+        for(int i=0;i<s.length();i++){
+             end=Math.max(end,arr[s.charAt(i)-'a']);
+             //check for every max element of the current pos
+             if(i==end){
+                 list.add(end-start+1);   //as soon as i is upto the last max index...just update it
+             }
+        }
+        return list;
+    }
+}
