@@ -1,0 +1,24 @@
+//if it is given that there should be only one majority element in the array 
+class Array1{
+public static void main(String[] args){
+    int[] arr={2,2,1,1,1,2,2};
+    System.out.println(Majortiy(arr));
+}
+public static int Majortiy(int[] arr){
+  int count=0;    //keep track of the count
+  int ele=0;   //keep track of the element
+  for(int i=0;i<arr.length;i++){
+      if(count==0){
+          ele=arr[i];
+      }
+      if(ele==i){
+          count++;
+      }
+      else{
+          count--;
+      }
+  }
+  return ele;
+}
+
+}
