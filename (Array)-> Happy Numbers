@@ -1,0 +1,23 @@
+class Solution{
+public boolean isHappy(int n) {
+	Set<Integer> seen = new HashSet<>();
+	while (n != 1) {
+		seen.add(n);
+		n = sumOfSquares(n);
+		if (seen.contains(n)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+private int sumOfSquares(int n) {
+	int res = 0;
+	while (n >= 1) {
+		int temp = n % 10;
+		res += temp * temp;
+		n /= 10;
+	}
+	return res;
+}
+}
