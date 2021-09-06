@@ -1,0 +1,51 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        
+        if(head == null || head.next == null) return true;
+        if(head.next.next == null && head.val != head.next.val) return false;
+        
+        ListNode mid = findMid(head);
+        ListNode last = reverse(mid);
+        ListNode curr = head;
+        
+        while(last != null)
+        {
+            if(curr.val != last.val) return false;
+            curr = curr.next;
+            last = last.next;
+        }
+        return true;      
+            
+       
+    }
+    
+    public ListNode findMid(ListNode head)
+    {
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        while(fast != null && fast.next != null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+    
+    public ListNode reverse(ListNode node)
+    {
+        ListNode right = null;
+        ListNode left = null;
+        ListNode current = node;
+        
+        while(current != null)
+        {
+            right = current.next;
+            current.next = left;
+            left = current;
+            current = right;
+        }
+        node = left;
+        return node;
+    }
+}
