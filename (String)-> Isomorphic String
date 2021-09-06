@@ -1,12 +1,27 @@
 class Solution {
-    static boolean isIsomorphic(String s, String t) {
-        if(s.length() != t.length()) return  false;
-        int[] s1 = new int[256];
-        int[] s2 = new int[256];
-
-        for(int i = 0; i < s.length(); i++) {
-            if(s1[s.charAt(i)] != s2[t.charAt(i)]) return  false;
-            s1[s.charAt(i)] = s2[t.charAt(i)] = i + 1;
+   public boolean isIsomorphic(String s, String t) {
+        if(s.length()!=t.length()) return false;
+        HashMap<Character,Character> map = new HashMap<>();
+        HashSet<Character> set = new HashSet<>();
+         //sari occurances ek ke sath mapped honi chahiye
+       //like in first case if g is mapped with d then in next iteration it is also mapped
+   //with d, mapping onee to one    
+       
+//check if element which are going inside the map are already mapped with some element or not, 
+//if already mapped go to the else if loop and check this time wheather it is trying to map with
+//map with some other element in t, if so return false
+       //otherwise, pehle jise map kiya tha abhi usi se kr rha
+       
+       
+        for(int i=0;i<s.length();i++){
+            if(!map.containsKey(s.charAt(i))){
+                if(set.contains(t.charAt(i))) return false;
+                else{
+                    map.put(s.charAt(i),t.charAt(i));
+                    set.add(t.charAt(i));
+                }
+            }
+            else if(map.get(s.charAt(i))!=t.charAt(i)) return false;
         }
         return true;
     }
