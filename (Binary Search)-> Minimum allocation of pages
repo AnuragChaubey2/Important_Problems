@@ -1,0 +1,54 @@
+/*
+cond 1: Weight.length==D
+if, weight array is equal to D, it means 1 weight convayer belt pe rakha jaueyga, which means ki array ka max ki max load hoga(Easiest)
+
+con2: Weight.length<D
+Not Possible
+
+cond3: if(D<Weight.length)--> then lowest posible answer will be array ka max, obviously, ab ek banda shayd 3 books padhae koi 2 padhe, and total sum of
+them will be greter than max of array.
+*/
+class Array1{
+    public static void main(String[] args){
+        
+    }
+    public static int minRange(int[] arr,int n){
+        int sum=0;
+        int max=0;
+        for(int val:arr){
+            sum+=val;   //yaha se high and low ka pata chal jayega
+            max=Math.max(max, val);
+        }
+        //minimuze the loading factor
+        int lo=max;
+        int hi=sum;
+        int ans=0;
+        while(lo<=hi){
+            int mid=lo+(hi-lo)/2;
+            //if it is possible to distrubute
+            if(isPossible(arr,mid,n)==true){
+                ans=mid;  //if possible, mid ko ans bana lo and reduce load
+                hi=mid-1;
+            }
+            else{
+                lo=mid+1;   //increase load
+            }
+        }
+        return ans;
+        
+    }
+    public static boolean isPossible(int[] arr,int mid,int n){
+        int stu=1;
+        int sum=0;
+        for(int i=0;i<arr.length;i++){
+            sum+=arr[i];
+            if(sum>mid){   //it means, usko ek aur student ki help padegi akele nhi kar payega
+                stu++;
+                sum=arr[i]; //wo student wahi se shuru karega jaha se gadbad hui thi
+                
+                
+            }
+        }
+        return stu<=n;
+    }
+}
