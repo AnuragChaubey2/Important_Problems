@@ -1,0 +1,23 @@
+class Array1{
+    public static void main(String[] args){
+        
+    }
+    public static int firstBad(int n){
+        //we have to minimize the point of filures
+        int left=0;
+        int right=n;
+        int firstbad=-1;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(firstBad(mid)){
+                firstbad=mid;
+                right=mid-1;   //initially, we found the first element at the mid, so we will try to dig deep and go for more less contitions,
+                
+            }
+            else{
+               left=mid+1;                 // *********        **** * ****   if we found, * is the first wvalue where we are getting this, then
+               //it is possible more smaller values we will get on the left side
+            }
+        }
+    }
+}
