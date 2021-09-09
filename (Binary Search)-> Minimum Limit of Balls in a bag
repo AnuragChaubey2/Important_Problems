@@ -1,0 +1,43 @@
+class Solution {
+    public int minimumSize(int[] nums, int maxOperations) {
+
+	int len = nums.length, max = Integer.MIN_VALUE;
+	for (int i = 0; i < len; i++) {
+		if (nums[i] > max)
+			max = nums[i];
+	}
+
+	int lo = 1, hi = max, ans = -1;
+
+	while (lo <= hi) {
+
+		int mid = lo + (hi - lo) / 2;
+		if (isPossible(nums, maxOperations, mid)) {
+			ans = mid;
+			hi = mid - 1;
+		} else
+			lo = mid + 1;
+	}
+
+	return ans;
+}
+
+// O(nums.length) O(1)
+public boolean isPossible(int[] nums, int maxOperations, int penalty) {
+
+	int len = nums.length, operations = 0;
+	for (int i = 0; i < len; i++) {
+
+		if (nums[i] <= penalty)
+			continue;
+
+		int quot = nums[i] / penalty, rem = nums[i] % penalty;
+		int cost = (rem == 0) ? quot - 1 : quot;
+
+		operations += cost;
+		if (operations > maxOperations)
+			return false;
+	}
+	return true;
+}
+}
