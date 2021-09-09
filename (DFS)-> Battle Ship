@@ -1,0 +1,33 @@
+// O(1) Space Greedy Solution
+// Time complexity: O(MN)
+// Space complexity: O(1), battleship can only be placed horizontally or vertically.
+class Solution {
+    public int countBattleships(char[][] board) {
+        if (board == null || board.length == 0 || board[0].length == 0) return 0;
+        final int M = board.length, N = board[0].length;
+        int count = 0;
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                if (board[i][j] == 'X') {
+                    checkHorizontal(board, i, j+1);
+                    checkVertical(board, i+1, j);
+                    board[i][j] = 'O';
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    
+    private void checkVertical(char[][] board, int x, int y) {
+        for (int i = x; i < board.length && board[i][y] == 'X'; i++) {
+            board[i][y] = 'O';
+        }
+    }
+    
+    private void checkHorizontal(char[][] board, int x, int y) {
+        for (int j = y; j < board[0].length && board[x][j] == 'X'; j++) {
+            board[x][j] = 'O';
+        }
+    }
+}
