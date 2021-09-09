@@ -1,0 +1,36 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int low=0;
+        int high=0;
+        int ans=0;
+        for(int i=0;i<weights.length;i++){
+            high+=weights[i];
+            low=Math.max(low,weights[i]);
+        }
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            //find the possibility wheather it is possible at mid or not
+            if(isPossible(weights,mid,days)==true){
+                ans=mid;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return ans;
+        
+    }
+    public static boolean isPossible(int[] arr,int mid,int n){
+        int D=1;
+        int sum=0;
+        for(int i=0;i<arr.length;i++){
+            sum+=arr[i];
+            if(sum>mid){
+                D++;
+                sum=arr[i];
+            }
+        }
+        return D<=n;
+    }
+}
