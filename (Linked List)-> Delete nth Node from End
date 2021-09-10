@@ -18,7 +18,8 @@ class Solution {
             ptr = ptr.next;
         }
         
-        while(ptr != null) {
+        while(ptr != null) {  //need of three pointer....when ptr reaches to the end of linked list
+//curr nth element ke barabar rhega....so, just make the prev.next=curr.next to preserve the rest of nodes, 4 ko chor ke baari sab print ho jayengey
             ptr = ptr.next;
             prev = current;
             current = current.next;             
