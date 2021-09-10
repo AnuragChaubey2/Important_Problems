@@ -1,0 +1,46 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head1=Reverse(l1);
+        ListNode head2=Reverse(l2);
+        ListNode head=new ListNode(-1);
+      ListNode itr=head;
+        int carry=0;
+        while(head1!=null || head2!=null || carry!=null){
+            //teeno mese koi ek bhi null hua to rukna nhi hai... bache walon ke liye chalna hai
+            int sum=carry+(c1!=null?c1.val:0)+(c2!=null?c2.val:0);
+            int digit=sum%10;
+            carry=sum/10;
+            itr=new ListNode(digit);  //mtalb new node me digit daalo and itr.next pe carry jayeg
+            
+            itr=itr.next;
+            if(c1!=null) c1=c1.next;
+            if(c2!=null) c2=c2.next;        
+            
+        }
+        //jasie hi teeno finish ho jaynegy we will get sum of 2 linked list as retrun             
+        return head.next;  //why coz this -1 is dummy node...we dont have to include that
+        }
+    
+    public ListNode Reverse(ListNode l1){
+        ListNode prev=null;
+        ListNode curr=head;
+        while(curr!=null){
+            ListNode next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        prev=head;
+        return head;
+    }
+}
