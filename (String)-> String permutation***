@@ -24,8 +24,8 @@ public boolean checkInclusion(String s1, String s2) {
                     return true;
                 }
  //other wise slide the window, by excluding the first element               
-                arr2[s2.charAt(i - s1len) - 'a']--;
-                arr2[s2.charAt(i) - 'a']++;   //Unclear
+                arr2[s2.charAt(i - s1len) - 'a']--;   //we have to have a window of atleast the size of length of string s2, then we are good to go
+                arr2[s2.charAt(i) - 'a']++;   
             }
             if(Arrays.equals(arr1 , arr2)){
                 return true;
