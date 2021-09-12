@@ -1,0 +1,21 @@
+class Solution{
+public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        boolean[][] visited = new boolean[image.length][image[0].length];
+        dfs(image, visited, sr, sc, newColor, image[sr][sc]);
+        return image;
+    }
+    
+    public void dfs(int[][] image, boolean[][] visited, int i, int j, int newColor, int oldColor) {
+        if (i < 0 || j < 0 || i >= image.length || j >= image[0].length || visited[i][j] == true) { // if out of bound stop iterating
+            return;
+        }
+        if (oldColor == image[i][j]) { // only iterate if the current cell's color == old color
+            visited[i][j] = true; // mark the current cell as visited
+            image[i][j] = newColor; // flip the color
+            dfs(image, visited, i + 1, j, newColor, oldColor); // go up
+            dfs(image, visited, i - 1, j, newColor, oldColor); // go down
+            dfs(image, visited, i, j - 1, newColor, oldColor); // go left
+            dfs(image, visited, i, j + 1, newColor, oldColor); // go right     
+        }
+    }
+}
