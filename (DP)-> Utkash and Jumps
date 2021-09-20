@@ -1,0 +1,20 @@
+class Array1{
+    public static void main(String[] args){
+        int n=5;
+        int p=20;
+        System.out.println(UtkarshandJump(n,p));
+    }
+    public static double UtkarshandJump(int n,int p){
+     double[] dp=new double[n+1];
+     dp[0]=1;
+     dp[1]=0;  //coz only prob 2 and 3 ki hai
+     dp[2]=p/100.0;
+     dp[3]=1-p/100.0;
+     for(int i=4;i<=n;i++){
+         dp[i]=dp[i-2]*p/100.0+dp[i-3]*(1-p/100.0);
+     }
+     return dp[n];
+     
+     
+    }
+}
