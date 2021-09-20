@@ -1,0 +1,77 @@
+class Solution {
+    public String tictactoe(int[][] moves) {
+        int len = moves.length;
+        if(len < 5) return "Pending";
+        char[][] grid = {{'.', '.', '.'},{'.', '.', '.'},{'.', '.', '.'}};        
+        for(int i = 0; i < len; i++){
+            int[] currentMove = moves[i];
+            if(i%2==0){
+                grid[currentMove[0]][currentMove[1]] = 'X';
+            }else{
+                grid[currentMove[0]][currentMove[1]] = 'O';
+            }
+        }
+        if(grid[0][0] == 'X' && grid[1][1] == 'X' && grid[2][2] == 'X'){
+            return "A";
+        }
+        
+        if(grid[0][0] == 'O' && grid[1][1] == 'O' && grid[2][2] == 'O'){
+            return "B";
+        }
+        
+        if(grid[0][2] == 'X' && grid[1][1] == 'X' && grid[2][0] == 'X'){
+            return "A";
+        }
+        
+        if(grid[0][2] == 'O' && grid[1][1] == 'O' && grid[2][0] == 'O'){
+            return "B";
+        }
+        
+        if(grid[0][0] == grid[0][1] && grid[0][1] == grid[0][2]){
+            if(grid[0][0] == 'X'){
+                return "A";
+            }else if(grid[0][0] == 'O'){
+                return "B";
+            }
+        }
+        if(grid[1][0] == grid[1][1] && grid[1][1] == grid[1][2]){
+            if(grid[1][0] == 'X'){
+                return "A";
+            }else if(grid[1][0] == 'O'){
+                return "B";
+            }
+        }
+        if(grid[2][0] == grid[2][1] && grid[2][1] == grid[2][2]){
+            if(grid[2][0] == 'X'){
+                return "A";
+            }else if(grid[2][0] == 'O'){
+                return "B";
+            }
+        }
+        if(grid[0][0] == grid[1][0] && grid[1][0] == grid[2][0]){
+            if(grid[0][0] == 'X'){
+                return "A";
+            }else if(grid[0][0] == 'O'){
+                return "B";
+            }
+        }
+        if(grid[0][1] == grid[1][1] && grid[1][1] == grid[2][1]){
+            if(grid[0][1] == 'X'){
+                return "A";
+            }else if(grid[0][1] == 'O'){
+                return "B";
+            }
+        }
+        if(grid[0][2] == grid[1][2] && grid[1][2] == grid[2][2]){
+            if(grid[0][2] == 'X'){
+                return "A";
+            }else if(grid[0][2] == 'O'){
+                return "B";
+            }
+        }                 
+        if(len ==  9){
+            return "Draw";
+        }
+        return "Pending";
+    }
+}
