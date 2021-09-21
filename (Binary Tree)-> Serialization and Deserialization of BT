@@ -1,0 +1,55 @@
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Node{
+    int key;
+    Node left,right;
+    Node(int key){
+        this.key=key;
+        left=right=null;
+    }
+}
+class Array1{
+   //Serialize and desirialize bianry tree-> 
+ /*process of converting ds or object into a sequence of bits so that it can be 
+    stored in file or memory buffer, or transmittes accross network  
+    Binary Tree--> FILE --> bianry Tree
+    Approch-> mark when the comming child is null, first preorder karo then store in the string
+       1
+      /  \        2 ke left me null, "1,2,*,*,3,4,*,*,5,*,*"
+    2     3       now serialization is done, o(n) time......
+   /     /  \     now using this string, create tree again,
+  null   4    5   put it inside array, and split basis of ','
+        / \    |\        put it in queue(can be solved without queue but easy)
+      null null|  \null   pop out elememnt and check wheather it is x or not
+               null        yes not, then create node of each and every element
+                           whenever we find x, just return null
+      */   
+    public static String serialization(Node root){
+        if(root==null){
+            return "X";
+        }
+        String leftSerialize=serialization(root.left);
+        String rightSerialize=serialization(root.right);
+        return root.key+","+leftSerialize+","+rightSerialize;
+    }
+    public static Node deserialization(String data){
+        String[] arr=data.split(",");
+        Queue<String> q=new LinkedList<>();
+        for(int i=0;i<arr.length;i++){
+            q.add(arr[i]);       
+        }
+         Node root=deserialize(q);
+         return root;
+    }
+    public static Node deserialize(Queue<String> q){
+        if(q.size()==0)return null;
+        String peek=q.poll();
+        if(peek.equals("X")) return null;
+        Node root=new Node(Integer.parseInt(peek));
+        root.left=deserialize(q);
+        root.right=deserialize(q);
+        return root;
+    }
+    }
