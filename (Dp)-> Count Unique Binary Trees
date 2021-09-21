@@ -1,0 +1,27 @@
+class Solution {
+    int[] table;
+    
+    private int f(int n) {
+        if(n == 0 || n == 1) {
+            return 1;
+        }
+        
+        if(table[n] != -1) {
+            return table[n];
+        }
+        
+        int sum = 0;
+        for(int node = 1; node <= n; node++) {
+            sum += f(node - 1) * f(n - node);
+        }
+        
+        table[n] = sum;
+        return sum;
+    }
+    
+    public int numTrees(int n) {
+        table = new int[n+1];
+        Arrays.fill(table, -1);
+        return f(n);
+    }
+}
