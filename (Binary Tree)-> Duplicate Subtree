@@ -1,0 +1,22 @@
+class Solution {
+    List<TreeNode> result;
+    Map<String,Integer> map;
+    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        map=new HashMap<>();
+        result=new LinkedList<>();
+        traverse(root);
+        return result;
+    }
+    
+    String traverse(TreeNode root){
+        if(root==null){
+            return "N";
+        }
+        String value=root.val+","+traverse(root.left)+","+traverse(root.right);
+        map.put(value,map.getOrDefault(value,0)+1);
+        if(map.get(value)==2){
+            result.add(root);
+        }
+        return value;
+    }
+}
