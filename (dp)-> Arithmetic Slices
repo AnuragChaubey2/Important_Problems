@@ -1,0 +1,19 @@
+class Solution {
+    public int numberOfArithmeticSlices(int[] arr) {
+          int[] dp=new int[arr.length];
+       int ans=0;
+       if(arr.length==0){
+           return 0;
+       }
+       if(arr.length==1 || arr.length==2){
+           return 0;
+       }
+       for(int i=2;i<arr.length;i++){
+           if(arr[i]-arr[i-1]==arr[i-1]-arr[i-2]){
+               dp[i]=dp[i-1]+1;  //grow ho gyi pechli wali se
+               ans+=dp[i];
+           }
+       }
+       return ans;
+    }
+}
