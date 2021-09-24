@@ -1,0 +1,38 @@
+class Array1{
+    public static void main(String[] args){
+        String name="mannu";
+        String typed="mmaannu";
+        System.out.println(FaultyKeyBoard(name,typed));
+    }
+    public static boolean FaultyKeyBoard(String name,String type) {
+        if(name.length()>type.length()){
+            return false;
+        }
+       int i=0;
+       int j=0;
+       while(i<name.length() && j<type.length()){
+           if(name.charAt(i)==type.charAt(j)){
+               i++;
+               j++;
+           }
+           else if(name.charAt(i-1)==type.charAt(j) && i>0){
+               j++;  //check for previous element
+               //because 2 bar hi type ho rha that's why prev pe check
+               
+           }
+           //now koi to hoga jo extra hoga...koi ek loop pehle khatam 
+           //ho jayegi, so current wale ko bhi check karna hai
+           //using while loop laga ke...
+           else{
+               return false;
+           }
+       }
+       while(j<type.length()){
+           if(name.charAt(i-1)!=type.charAt(j)){
+               return false;
+           }
+           j++;
+       }
+       return i<name.length()?false:true;
+    }
+}
