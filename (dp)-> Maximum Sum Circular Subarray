@@ -1,3 +1,9 @@
+/*
+Algorithm--suppose 2,1,-5,4,-3,1,-3,4,1 is our array, from kadane we are getting-> 4 and from circular we are getting 6[4,1,2,1] ---> approch is, mark all the circular array with red
+and rest elements as blue, mark total subarray as green--> red=6, blue=-6 and green =0;
+if we subtract green from blue we get the result, which means ....if we change the sign of each and every blue elements we will get positive number which is 6
+but originally it was -6, so total-(blue) =red.....0-(-6)= +6 ans .
+*/
 class Solution {
 /*Kedane's Algorithm*/
     public int kedane(int a[], int n){
@@ -19,8 +25,8 @@ class Solution {
             arr_sum += a[i]; //taking total of array
             a[i] = -a[i]; //inverting array
         }
-        int max_circular = arr_sum + kedane(a,a.length); // Subtracting total sum of array and minimum sum subarray , since - - = + inverting is done so that you can recall kedane again for max , max of inverted subarray is minimum sum subarray
+        int max_circular = arr_sum + kedane(a,a.length);// this will be 6 // Subtracting total sum of array and minimum sum subarray , since - - = + inverting is done so that you can recall kedane again for max , max of inverted subarray is minimum sum subarray
         
-        return Math.max(max_normal,max_circular);
+        return Math.max(max_normal,max_circular);  //max of 6 and 4 ans =6
     }
 }
