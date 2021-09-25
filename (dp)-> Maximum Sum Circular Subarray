@@ -1,0 +1,26 @@
+class Solution {
+/*Kedane's Algorithm*/
+    public int kedane(int a[], int n){
+        int res = a[0],maxend = a[0];
+        for(int i = 1; i < n; i++){
+            maxend = Math.max(maxend+a[i],a[i]);
+            res = Math.max(res,maxend);
+        }
+        return res;
+    }
+    public int maxSubarraySumCircular(int[] a) {
+		int max_normal = kedane(a,a.length); //max of normal subarray
+        
+        if(max_normal<0){
+            return max_normal;
+        }
+        int arr_sum = 0;
+        for(int i = 0;i<a.length;i++){
+            arr_sum += a[i]; //taking total of array
+            a[i] = -a[i]; //inverting array
+        }
+        int max_circular = arr_sum + kedane(a,a.length); // Subtracting total sum of array and minimum sum subarray , since - - = + inverting is done so that you can recall kedane again for max , max of inverted subarray is minimum sum subarray
+        
+        return Math.max(max_normal,max_circular);
+    }
+}
