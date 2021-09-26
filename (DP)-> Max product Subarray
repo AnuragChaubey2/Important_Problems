@@ -1,0 +1,26 @@
+/*
+just see that max_ending=max(currelement(coz multiplying comming element can make it negative so using only currentelement)
+,max_ending*nums[i](lets say both are poisive),min_end*nums[i](the role of min is, lets say we get comming element to be neagtive, and)
+current element is also negative so they make a big positive)
+
+
+
+*/
+class Array1 {
+    public static int maxProduct(int[] nums) {
+     int max_over=nums[0];
+     int max_end=nums[0];
+     int min_end=nums[0];
+     for(int i=1;i<nums.length;i++){
+         int temp=max_end;
+         max_end=max(nums[i],nums[i]*max_end,nums[i]*min_end);
+          min_end=min(nums[i],nums[i]*temp,nums[i]*min_end);  //here the max ending has been updated, but  we want the prev value so store cur max in temp
+         max_over=max(max_over,max_end);
+     }
+     return max_over;
+    }
+    public static void main(String[] args){
+        int[] nums={2,3,-2,4,-5};
+        System.out.println(maxProduct(nums));
+    }
+}
