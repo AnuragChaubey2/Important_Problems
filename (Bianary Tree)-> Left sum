@@ -1,0 +1,32 @@
+class Node{
+int val;
+Node left;
+Node right;
+Node(int val){
+this.val=val;
+left=right=null;
+}
+}
+class Solution{
+public static int LeftSum(Node root){
+if(root==null){
+return 0;
+}
+if(root.left!=null && root.left.left==null && root.left.right==null){
+sum+=root.left.val;
+}
+if(root.left!=null){
+sum+=LeftSum(root.left);
+}
+if(root.right!=null){
+sum+=LeftSum(root.right);
+}
+return sum;
+
+
+
+}
+
+
+
+}
