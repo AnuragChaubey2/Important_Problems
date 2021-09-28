@@ -1,0 +1,41 @@
+class Solution {
+   public int maxProfit(int[] arr) {
+       int obsp=-arr[0];
+        int ossp=0;
+        int ocsp=0;
+        for(int i=1;i<arr.length;i++){
+            int nbsp=0;
+            int nssp=0;
+            int ncsp=0;
+            //new boiught pe ya to porana profit rakhte ho... ya new cooled pe
+            //aaj buy kar lete ho
+            if(ocsp-arr[i]>obsp){
+                nbsp=ocsp-arr[i];
+            }
+            else{
+                nbsp=obsp;
+            }
+            //now for new bought state--> poorani bought state ko rakhte ya
+  //ya poorani bought pe aaj sell kar de
+  if(obsp+arr[i]>ossp){
+      nssp=obsp+arr[i];
+  }
+  else{
+      nssp=ossp;
+  }
+  if(ossp>ocsp){  //ya to previous sold se jo profit mila to wo use kar lo
+      ncsp=ossp;
+  }
+  else{
+      ncsp=ocsp; //ya to porana wala hi coling chadha do
+  }
+   obsp=nbsp;
+        ossp=nssp;
+        ocsp=ncsp;   //new old banana hai
+            
+        }
+        return ossp;
+       
+        
+    }
+}
