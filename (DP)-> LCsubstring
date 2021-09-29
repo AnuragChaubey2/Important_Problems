@@ -1,0 +1,31 @@
+class Array1{
+    public static void main(String[] args){
+        String s1 = "abcdxyz";
+        String s2 = "xyzabcd"; 
+        int m=s1.length();
+        int n=s2.length();
+       System.out.println(LCsubstring(s1,s2,m,n));
+    }
+public static int LCsubstring(String s1,String s2,int m,int n){
+    int[][] dp=new int[m+1][n+1];
+    int result=0;
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            if(i==0 || j==0){
+                dp[i][j]=0;
+            }
+           else if(s1.charAt(i-1)==s2.charAt(j-1)){
+                dp[i][j]=dp[i-1][j-1]+1;
+            result=Integer.max(result,dp[i][j]);
+           } 
+           else{
+               dp[i][j]=0;
+           } 
+        }
+    }
+    return result;
+}
+}
+    
+    
+    
