@@ -1,0 +1,80 @@
+//print shortest common supersequence
+class Array1{
+    public static void main(String[] args){
+        //plan-> first find the LCS of both strings
+        // dp tabel me insrt it
+        //for SCS-> check if both are equal just append inside them in a StringBuilder/ check for using which letter we get the max subsequence
+        
+    }
+    //step 1-> lcs
+    public static int LCS(String s1,String s2,int m,int n){
+        int[][] dp=new int[m+1][n+1];
+        int max=0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(i==0 || j==0){
+                    dp[i][j]=0;
+                }
+                else if(s1.charAt(i-1)==s2.charAt(j-1)){
+                    dp[i][j]=1+dp[i-1][j-1];
+                }
+                else{
+                    dp[i][j]=Integer.max(dp[i-1][j], dp[i][j-1]);
+                }
+                max=Integer.max(max, dp[i][j]);
+            }
+        }
+        return max;
+    }
+    public static String ShortestSuperSubsequnce(String s1,String s2){
+       int m=s1.length();
+       int n=s2.length();
+       LCS(s1,s2,m,n);
+       int[][] dp=new int[m][m];
+       //Step-2 > check for theequal elements
+       int i=m;
+       int j=n;
+//whatever character present in lcs we have to include it only once 
+//inside the scs
+/*
+s1="A G G T A B"
+s2="G X T X A Y B"    lcs= G T A B
+Scs= A G G X T X A B
+//in case of ..first pointer ispointing to g, 2nd one is also pointig
+to g, and lcs is also g therefore just include only one and increment both pointer
+now keep going forward and include the ith character element with is next g
+and increment j pointer until T is reaached and include the elements
+of j, whicih is X, now T is in i, j and LCS so include only once and
+//increment both pointers
+
+
+
+*/
+       StringBuilder sb=new StringBuilder();
+       while(i>0 && j>0){
+           if(s1.charAt(i-1)==s2.charAt(j-1)){
+               sb.append(s1.charAt(i-1));
+           }
+           else if(dp[i-1][j]>dp[i][j-1]){
+               sb.append(s1.charAt(i-1));
+               i++;
+           }
+           else {
+               sb.append(s2.charAt(j-1));
+               j--;
+           }
+       }
+       //now check condition for wheather still any iteration left in the bucket or not
+       while(i>0){
+           sb.append(s1.charAt(i-1));
+           i++;
+       }
+       while(j>0){
+           sb.append(s2.charAt(j-1));
+           j--;
+       }
+       String k=sb.reverse().toString();
+       return k;
+       
+    }
+}
