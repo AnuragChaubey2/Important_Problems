@@ -1,0 +1,23 @@
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+       
+        if(head == null) {
+            return false;
+        }
+        
+        Set<ListNode> mySet = new HashSet<ListNode>();
+        
+        ListNode cur = head;
+        
+        while(cur.next != null) {
+            if(mySet.contains(cur)) {
+                return true;
+            }
+            mySet.add(cur);
+            cur = cur.next;
+        }        
+        
+        return false;
+        
+    }
+}
