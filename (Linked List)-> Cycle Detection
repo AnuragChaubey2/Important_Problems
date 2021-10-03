@@ -21,3 +21,18 @@ public class Solution {
         
     }
 }
+
+//Tortoise and hair's algoirthm......space efficient
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if(head == null)    return false;
+        ListNode tortoise = head, hare = head;
+        while(hare.next != null && hare.next.next != null){
+            tortoise = tortoise.next;
+            hare = hare.next.next;
+            if(tortoise == hare)
+                return true;
+        }
+        return false;
+    }
+}
