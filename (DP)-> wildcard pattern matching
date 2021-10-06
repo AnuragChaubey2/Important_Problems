@@ -1,0 +1,73 @@
+
+import java.util.Arrays;
+
+//string pattern matching......?-> kisi bhi character ke liye stand kar sakta but bas ek
+//either a, b ,c....anyone...but for *-> ye kitne bhi character ban sakta hai....
+/*
+*----> a,b,c
+*---->a,b,c,d....kitne bhi charact ko cancel kar sakta
+ya khud gayab ho jaygea, kisi se match nhi karega
+baaabab
+ba*a?
+ba to same hai..if star ko hum aab se match kara de....? to automatically b ban jayega
+so ye pattern match ho jayega
+//approch--> ek axis pe string
+dusre pe pattern.....LCS jaisi dp hai
+//each block ki meaning--> kya a*a?.....aabab_ ko match karta hai ya nhi
+//true false dalna bas dp table me...prob solved from bottom to top
+
+case1-> when we find ? then just check for right bottom digonal....becasuse smaller problem is stored there....
+case2-> whenever a character comes, just check for if it is same with the current character of string...if yes...go for bottom right digonal for same reson
+case 3-> now * can become all..._, a,ab,aba,abb,anything it it become _ means we have to check for bottom value....if it become a..then check for bottom right
+digonal....as * expand it character out digonal expans to the right....and anywhere we find * we will return true in that block....but this is n^3 compleixty
+so for * just check for wheather it is null if yes check bottom digoal..otherwise check right....it means star still survive in next right pos (n^2)
+*/
+class Array1{
+    public static void main(String[] args){
+        
+    }
+   static boolean strmatch(String str, String pattern,
+                            int n, int m)
+    {
+      
+        if (m == 0)
+            return (n == 0);
+ 
+       
+        boolean[][] lookup = new boolean[n + 1][m + 1];
+ 
+        
+        for (int i = 0; i < n + 1; i++)
+            Arrays.fill(lookup[i], false);
+ 
+       
+        lookup[0][0] = true;
+ 
+     
+        for (int j = 1; j <= m; j++)
+            if (pattern.charAt(j - 1) == '*')
+                lookup[0][j] = lookup[0][j - 1];
+      
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j <= m; j++)
+            {
+            
+                if (pattern.charAt(j - 1) == '*')
+                    lookup[i][j] = lookup[i][j - 1]
+                                   || lookup[i - 1][j];
+ 
+           
+                else if (pattern.charAt(j - 1) == '?'
+                         || str.charAt(i - 1)== pattern.charAt(j - 1))
+                    lookup[i][j] = lookup[i - 1][j - 1];
+ 
+               
+                else
+                    lookup[i][j] = false;
+            }
+        }
+ 
+        return lookup[n][m];
+    }
+}
