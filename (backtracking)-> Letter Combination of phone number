@@ -1,0 +1,40 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> ans=new ArrayList<>();
+        if(digits.length()==0){
+            return ans;
+        }
+        HashMap<Character,String> map=new HashMap<>();
+        map.put('2',"abc");
+         map.put('3',"def");
+         map.put('4',"ghi");
+         map.put('5',"jkl");
+         map.put('6',"mno");
+         map.put('7',"pqrs");
+         map.put('8',"tuv");
+         map.put('9',"wxyz");
+        backtrack(digits,0,map,new StringBuilder(),ans);
+        return ans;
+    }
+    public static void backtrack(String digits,int i,HashMap<Character,String> map,StringBuilder sb,List<String> ans){
+        //0 th index se problem silve hoga...jaise hi string ki length ke equal builder ke barabar
+        if(i==digits.length()){
+            ans.add(sb.toString());
+            return;
+        }
+        String curr=map.get(digits.charAt(i));   
+        for(int k=0;k<curr.length();k++){
+            sb.append(curr.charAt(k));    
+            backtrack(digits,i+1,map,sb,ans); 
+            sb.deleteCharAt(sb.length()-1);
+            
+            //working--> when i=0, "23"-> 2 is selected..noew curr is on 2....now for loop chala
+   //and pehla char a append ho gaya..then i-> i+1 means 2 se ab 3 pe aa gaya which means ab 3 ke characters uthayega now fir se k wali food loop chalega..and now ad ho gaya and backtrack and delete from string
+            //from a make a call to 3 character first index...ad length equal add to list then delete d"
+            //oth character pe 2 1th charac  pe hia 3
+             //"abc" a hua append....
+            
+        }
+        
+    }
+}
