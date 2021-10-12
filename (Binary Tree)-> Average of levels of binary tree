@@ -1,0 +1,33 @@
+public List<Double> averageOfLevels(TreeNode root) 
+{
+        if(root == null)
+            return null;
+        
+        Queue<TreeNode> q = new LinkedList<>();
+        List<Double> ans = new ArrayList<>();
+        q.offer(root);
+        
+        while(!q.isEmpty())
+        {
+            int size = q.size();
+            double sum = 0;
+            for(int i=0;i<size;++i)
+            {
+                TreeNode cur = q.poll();
+                
+                sum+= cur.val;
+                
+                if(cur.left != null)
+                {
+                    q.offer(cur.left);
+                }
+                if(cur.right != null)
+                {
+                    q.offer(cur.right);
+                }
+            }
+            double adding = (double)sum/size;
+            ans.add(adding);         
+        }
+        return ans;     
+}
