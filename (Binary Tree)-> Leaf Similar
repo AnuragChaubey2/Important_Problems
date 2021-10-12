@@ -1,0 +1,27 @@
+class Solution {
+    //addd leave to the array list of both the trees and atlast check if they are equal or not
+    
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> leaves1 = new ArrayList<>();
+        addLeaf(root1, leaves1);
+        
+        List<Integer> leaves2 = new ArrayList<>();
+        addLeaf(root2, leaves2);
+
+        return leaves1.equals(leaves2);
+    }
+
+    private void addLeaf(TreeNode root, List<Integer> leaves) {
+        if (root == null) {
+            return;
+        }
+
+        if (root.left == null && root.right == null) {
+            leaves.add(root.val);
+            return;
+        }
+
+        addLeaf(root.left, leaves);
+        addLeaf(root.right, leaves);
+    }
+}
