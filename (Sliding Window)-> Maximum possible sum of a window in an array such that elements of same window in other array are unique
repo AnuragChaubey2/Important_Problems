@@ -1,0 +1,34 @@
+
+import java.util.HashSet;
+import java.util.Set;
+
+class Array1{
+    public static void main(String[] args){
+        int[] A = {0, 1, 2, 3, 0, 1, 4};
+        int[] B = {9, 8, 1, 2, 3, 4, 5};
+         System.out.println(maxSubarray(A,B));
+    }
+    //maximum of all s class Solution {
+    public static int maxSubarray(int[] A, int[] B) {
+    //for checking the uniqness of an elemen , take set
+    Set<Integer> set=new HashSet<>();int result=0;
+    int curr_sum=0;
+    int curr_beg=0;  //coz we have to remove the first element in order to 
+    //move forward our window one by one
+    for(int i=0;i<A.length;i++){
+    while(set.contains(A[i])){
+        set.remove(curr_beg);
+        curr_sum-=B[curr_beg];
+        curr_beg++;
+    }
+    set.add(A[i]);
+    curr_sum+=B[i];
+    result=Integer.max(result,curr_sum);
+    }
+    return result;
+    }
+}
+       
+    
+//complexity analsys--> O(n*K)
+    
