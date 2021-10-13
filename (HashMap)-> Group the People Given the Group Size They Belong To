@@ -1,3 +1,8 @@
+// simple approch--> just check if at any index if 1 is there it means, index i wala banda sirf 1 size ke grp me jaa sakta, same for let's say 3
+at index 0 3 is present it means, 0 wala bandaa us grp me jayega jiski size is 3...same like 1 and 2 index also contains 3..then everyone will go in same grp
+but let's say 4 comes into pitchure and it is also allowed to go in cap tp grp 3 then a new arraylist should be formed to admit him. thats what the approch is.
+
+
 class Solution {
     public List<List<Integer>> groupThePeople(int[] arr) {
         
