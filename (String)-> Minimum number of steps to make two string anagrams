@@ -1,0 +1,16 @@
+class Solution {
+    public int minSteps(String s, String t) {
+        int n = s.length(), ans = 0;
+        int[] arr = new int[26];
+        for(int i = 0; i < n; i++) {
+            arr[s.charAt(i) - 'a']++;
+            arr[t.charAt(i) - 'a']--;
+        }
+        for(int i = 0; i < 26; i++) if(arr[i] > 0)
+            //if it found a value which is new then its count will be in - so we will add every count of number which is poisitve
+            ans += arr[i];
+        return ans;
+    }
+}
+
+//in first case--> 2-1=1 naaki 1-2 wale ko consider karna
