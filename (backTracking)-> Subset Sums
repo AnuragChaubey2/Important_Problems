@@ -1,0 +1,27 @@
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+//subset sum
+class Array1{
+    public static void main(String[] args){
+        
+    }
+    public static void function(int ind,int sum,ArrayList<Integer> list,int N, ArrayList<Integer> subsetSum){
+        
+        if(ind==N){
+            subsetSum.add(sum);
+            return;
+        }
+        
+        //choose
+        function(ind+1,sum+list.get(ind),list,N,subsetSum);
+        function(ind+1,sum,list,N,subsetSum);
+    }
+    public static ArrayList<Integer> subsetSum(ArrayList<Integer> arr,int k){
+        ArrayList<Integer> subset=new ArrayList<>();
+        function(0,0,arr,arr.size(),subset);
+        Collections.sort(subset);
+        return subset;
+    }
+}
