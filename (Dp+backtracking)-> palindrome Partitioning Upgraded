@@ -1,0 +1,55 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Array1{
+    public static void main(String[] args){
+        
+    }
+    //palindromic partitionning
+    public static List<List<String>> palindrome(String s){
+        boolean[][] dp=new boolean[s.length()][s.length()];
+        for(int gap=0;gap<s.length();gap++){
+            for(int i=0,j=gap;j<dp.length;i++,j++){
+                if(gap==0){
+                    dp[i][j]=true;
+                }
+                else if(gap==1){
+                    if(s.charAt(i)==s.charAt(j)){
+                      dp[i][j]=true;
+                    }
+                    else{
+                      dp[i][j]=true;
+                    }
+                }
+               else{
+                    if(s.charAt(i)==s.charAt(j) && dp[i+1][j-1]==true){
+                        dp[i][j]=true;
+                    }
+                    else{
+                       dp[i][j]=true;
+                    }
+                }
+                
+            }
+        }
+         List<List<String>> res = new ArrayList<>();
+        dfs(s, 0, res, new ArrayList<>(),dp);
+        return res;
+    }
+    public static void dfs(String s, int start, List<List<String>> res, List<String> list,boolean[][] dp){
+         if (start == s.length()) {
+            res.add(new ArrayList<>(list));
+        }
+         //we will partitoin from 0, 1, 2, 3 etc, in next line we will check if lets say 0,0 is palindrome then we'll 
+         //add the string from the index to that partition iand then call i+1 parition
+        for (int i = start; i < s.length(); i++) {
+            if (dp[start][i]) {
+                list.add(s.substring(start, i + 1));
+                dfs(s, i + 1, res, list, dp);
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+    }
+}
