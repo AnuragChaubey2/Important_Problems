@@ -1,0 +1,48 @@
+/*
+   Time Complexity: O(N)
+   Space Complexity: O(1)
+
+   Where N is the size of the string. 
+*/
+
+public class Solution {   
+    public static boolean findOverlap(String s){
+
+        //Initializing the variables.
+        int firstOccurAB = s.length();
+        int firstOccurBA = s.length();
+        int lastOccurBA = -1;
+        int lastOccurAB = -1;
+
+        //Iterating through the characters of the string.
+        for(int i = 1; i < s.length() ; i++){
+
+            if (s.charAt(i)=='A' && s.charAt(i-1)=='B'){
+
+                //Updating the first and last occurence of sub-string AB.
+                lastOccurBA = Math.max (lastOccurBA , i - 1);
+                firstOccurBA = Math.min (firstOccurBA , i);
+            }
+
+            if (s.charAt(i)=='B' && s.charAt(i-1)=='A'){
+
+                //Updating the first and last occurence of sub-string BA.
+                lastOccurAB = Math.max (lastOccurAB , i - 1);
+                firstOccurAB = Math.min (firstOccurAB , i);
+            }
+        }
+
+        //If the last occurence of AB and first occurence of BA does not overlap return true.
+        if (lastOccurAB != - 1 && firstOccurBA != s.length() && lastOccurAB >firstOccurBA){
+            return true;
+        }
+
+        //If the last occurence of BA and first occurence of AB does not overlap return true.
+        if (lastOccurBA != - 1 && firstOccurAB != s.length() && lastOccurBA > firstOccurAB){
+            return true;
+        }
+
+        return false;
+    }
+
+}
