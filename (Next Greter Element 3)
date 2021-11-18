@@ -1,0 +1,53 @@
+class Array1{
+    public static void main(String[] args){
+        int num=21;
+        System.out.println(nge(num));
+    }
+    public static int nextGreterElement(int n){
+        //String Builder me daal ke String bana ke character sort kar de then after convert string into interger
+        //1425--> 5421 and break out of loop and print this ans
+        int[] k=convert(n);
+        int left=0;
+        int right=k.length-1;
+        while(left<right){
+            if(k[left]>k[right]){
+                right--;
+            }
+            else if(k[left]<k[right]){
+                swap(k,left,right);
+                convertAgain(k);
+                break;
+            }
+        }
+        if(n==convertAgain(k)){
+            return -1;
+        }
+        return convertAgain(k);
+    }
+  public static int[] convert(int number){   
+String temp = Integer.toString(number);
+int[] numbers = new int[temp.length()];
+for (int i = 0; i < temp.length(); i++) {
+    numbers[i] = temp.charAt(i) - '0';
+}
+return numbers;
+    }
+  public static void swap(int[] arr,int i,int j){
+     int temp=arr[i];
+     arr[i]=arr[j];
+     arr[j]=temp;
+     i++;
+     j--;
+  }
+  public static int convertAgain(int[] nums){
+
+StringBuilder strNum = new StringBuilder();
+
+for (int num : nums) 
+{
+     strNum.append(num);
+}
+int finalInt = Integer.parseInt(strNum.toString());
+return finalInt;
+  }
+}
