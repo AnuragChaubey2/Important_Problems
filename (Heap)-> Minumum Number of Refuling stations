@@ -1,0 +1,39 @@
+
+import java.util.PriorityQueue;
+
+//minium number of refueling stops
+class Array1{
+    public static void main(String[] args){
+        
+    }
+    public static int NumberOfFuels(int target,int startFuel,int[][] stations){
+        int currFuel=startFuel;
+        int numberofstops=0;
+        PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+        for(int[] station:stations){
+            int nextStation=station[0];
+            int nextFuel=station[1];
+            while(currFuel<nextStation){  //exaust our fuel
+                if(pq.isEmpty()){
+                    return -1;
+                }
+                int refuel=pq.poll();
+                currFuel=currFuel+refuel;
+                numberofstops++;
+                //this is the condition if we are not left with any fuel then we are using the station
+                
+            }
+            //if we are left with suffienect amount of fuel
+            pq.offer(nextFuel);
+        }
+        while(currFuel<target){
+            if(pq.isEmpty()){
+                return -1;
+            }
+             int refuel=pq.poll();
+                currFuel=currFuel+refuel;
+                numberofstops++;
+        }
+        return numberofstops;
+    }
+}
