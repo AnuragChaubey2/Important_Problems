@@ -1,0 +1,29 @@
+class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+        int[] ans=new int[nums.length];
+        int start=0;
+        int end=nums.length-1;
+        
+        while(start<end){
+            if(nums[start]%2!=0 && nums[end]%2==0){
+                swap(nums,start,end);
+                start++;
+                end--;
+            } else if(nums[start]%2==0 && nums[end]%2!=0){
+                start++;
+                end--;
+            } else if(nums[start]%2==0 && nums[end]%2==0){
+                start++;
+            }
+            else{
+                end--;
+            }
+        }
+         return ans;
+    }
+    public void swap(int[] arr, int a,int b){
+      int temp=arr[b];
+        arr[b]=arr[a];
+        arr[a]=temp;
+    }
+}
