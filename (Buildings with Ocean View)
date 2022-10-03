@@ -1,0 +1,28 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class HelloWorld {
+    public static void main(String[] args) {
+       int[] arr=new int[]{4,2,3,1};
+       
+    }
+    public static int[] OceanView(int[] arr){
+    boolean[] res=new boolean[arr.length];
+    int count=0;
+    int max=0;
+    for(int i=arr.length-1;i>0;i--){
+        if(arr[i]>max){
+            res[i]=true;
+            count++;
+        }
+        max=Integer.max(max,arr[i]);
+    }
+    int[] building=new int[count];
+    for(int i=0;i<building.length;i++){
+        if(res[i]){
+            building[i++]=i;
+        }
+    }
+    return building;
+    }
+}
